@@ -13,79 +13,79 @@ import java.util.stream.Collectors;
 @Entity
 public class Sala {
 
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Integer id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 
-    private String nome;
+	private String nome;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    private Set<Lugar> lugares = new HashSet<>();
-    
-    private BigDecimal preco = BigDecimal.ZERO;
+	@OneToMany(fetch = FetchType.EAGER)
+	private Set<Lugar> lugares = new HashSet<>();
 
-    /**
-     * @deprecated hibernate only
-     */
-    public Sala() {
+	private BigDecimal preco = BigDecimal.ZERO;
 
-    }
-    
-    public Sala(String nome, BigDecimal preco) {
-    	this.nome = nome;
-    	this.preco = preco;
-    	}
-    
-    	public BigDecimal getPreco() {
-    	return preco.setScale(2, RoundingMode.HALF_UP);
-    	}
-    	
-    	public void setPreco(BigDecimal preco) {
-    	this.preco = preco;
-    	}
+	/**
+	 * @deprecated hibernate only
+	 */
+	public Sala() {
 
-    public Sala(String nome) {
-        this.nome = nome;
-    }
+	}
 
-    public Integer getId() {
-        return id;
-    }
+	public Sala(String nome, BigDecimal preco) {
+		this.nome = nome;
+		this.preco = preco;
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public BigDecimal getPreco() {
+		return preco.setScale(2, RoundingMode.HALF_UP);
+	}
 
-    public String getNome() {
-        return nome;
-    }
+	public void setPreco(BigDecimal preco) {
+		this.preco = preco;
+	}
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+	public Sala(String nome) {
+		this.nome = nome;
+	}
 
+	public Integer getId() {
+		return id;
+	}
 
-    public void add(Lugar lugar) {
-        this.lugares.add(lugar);
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public Set<Lugar> getLugares() {
-        return lugares;
-    }
+	public String getNome() {
+		return nome;
+	}
 
-    public void setLugares(Set<Lugar> lugares) {
-        this.lugares = lugares;
-    }
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 
-    public Map<String, List<Lugar>> getMapaDeLugares() {
-        if(!this.lugares.isEmpty()){
-            return this.lugares.stream().collect(Collectors.groupingBy(Lugar::getFileira,Collectors.toList()));
-        }
-        return Collections.emptyMap();
-    }
+	public void add(Lugar lugar) {
+		this.lugares.add(lugar);
+	}
 
-    public Integer lugar(String fileira, Integer posicao){
-        Optional<Lugar> optional = this.lugares.stream().filter((x) -> fileira.equals(x.getFileira()) && posicao.equals(x.getPosicao())).findFirst();
-        return optional.get().getId();
-    }
+	public Set<Lugar> getLugares() {
+		return lugares;
+	}
+
+	public void setLugares(Set<Lugar> lugares) {
+		this.lugares = lugares;
+	}
+
+	public Map<String, List<Lugar>> getMapaDeLugares() {
+		if (!this.lugares.isEmpty()) {
+			return this.lugares.stream().collect(Collectors.groupingBy(Lugar::getFileira, Collectors.toList()));
+		}
+		return Collections.emptyMap();
+	}
+
+	public Integer lugar(String fileira, Integer posicao) {
+		Optional<Lugar> optional = this.lugares.stream()
+				.filter((x) -> fileira.equals(x.getFileira()) && posicao.equals(x.getPosicao())).findFirst();
+		return optional.get().getId();
+	}
 }
