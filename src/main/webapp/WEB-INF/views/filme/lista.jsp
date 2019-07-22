@@ -13,7 +13,7 @@
 				<tr>
 					<th>Nome</th>
 					<th>Duração</th>
-					<!-- <th>Preço</th> -->
+					 <th>Preço</th> 
 					<th colspan="2" class="text-center">Ações</th>
 				</tr>
 			</thead>
@@ -22,7 +22,7 @@
 					<tr>
 						<td>${filme.nome}</td>
 						<td>${filme.duracao.toMinutes()}</td>
-				<%--		<td>${filme.preco}</td>			--%>			
+						<td>${filme.preco}</td>						
 						<td>
 							<a onclick="excluir(${filme.id})" class="btn btn-danger">Excluir</a>
 						</td>
@@ -31,7 +31,7 @@
 			</tbody>
 		</table>
 		<div class="col-md-6 col-md-offset-3">
-			<a href="/admin/filme" class="btn btn-block btn-info">Novo</a>
+			<a href="/admin/filme"class="btn btn-block btn-info">Novo</a>
 		</div>
 		</div>
 		<script>
