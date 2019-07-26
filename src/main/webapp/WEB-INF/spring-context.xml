@@ -40,13 +40,21 @@
 		</property>
 	</bean>
 	
+	<bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+	<property name="converters">
+		<set>
+			<bean class="br.com.caelum.ingresso.converter.YearMonthConverter"/>
+				</set>
+			</property>
+		</bean>
 	<!-- gerenciamento da transação pelo spring -->
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory"/>
 	</bean>  
 	
 	<tx:annotation-driven/>
-
+	
+	<mvc:annotation-driven conversion-service="conversionService"/>
 
 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<property name="host" value="smtp.gmail.com" />
